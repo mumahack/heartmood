@@ -32,3 +32,13 @@ Route::post('/setvalue', function () {
     $configStorage->value = $value;
     $configStorage->save();
 });
+
+Route::get('/getvalue', function () {
+
+    $configstorage = App\ConfigStorage::all();
+    $retArr  = [];
+    foreach( $configstorage->toArray() as $item){
+        $retArr[$item["name"]] = $item["value"];
+    }
+    return json_encode($retArr);
+});

@@ -12,4 +12,11 @@ class ConfigStorage extends Model
      * @var array
      */
     protected $fillable = ['name','value'];
+
+    /**
+     * The attributes that should be visible in arrays.
+     *
+     * @var array
+     */
+    protected $visible = ['name','value'];
 }
