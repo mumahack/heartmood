@@ -14,3 +14,8 @@
 Route::get('/', function () {
     return view('welcome');
 });
+
+
+Route::get('/tcpcommand', function () {
+    return json_encode(array("command" => "FSOC002255"));
+});
