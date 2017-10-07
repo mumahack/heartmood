@@ -23,3 +23,12 @@ Route::get('/backend', function () {
 Route::get('/tcpcommand', function () {
     return json_encode(array("command" => "FSOC002255"));
 });
+
+
+Route::post('/setvalue', function () {
+    $name = $_POST["name"];
+    $value = $_POST["value"];
+    $configStorage = \App\ConfigStorage::firstOrNew(['name' => $name]);
+    $configStorage->value = $value;
+    $configStorage->save();
+});
