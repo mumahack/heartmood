@@ -14,11 +14,12 @@
 <script>
 
     var currentVideo = null;
+    var player = null;
     function yourFunction() {
         // do whatever you like here
         $.getJSON('getvalue', function (data) {
             newVideo = currentVideo;
-            switch (data.heartbeat) {
+            switch (parseInt(data.heartbeat)) {
                 case 1:
                     newVideo = "cLNjP1vkyYU";
                     break;
@@ -31,10 +32,12 @@
             }
             $('#heartbeat').html(data.heartbeat);
 
-            if (newVideo !== currentVideo) {
+            if (newVideo != currentVideo) {
+                console.log("need to play following video"+currentVideo);
                 currentVideo = newVideo;
-                var myVideoPlayer = new MediaElementPlayer('youtube1');
-                myVideoPlayer.media.pluginApi.loadVideoById(currentVideo);
+                var myVideoPlayer = player;
+                console.log(myVideoPlayer);
+                myVideoPlayer.media.youTubeApi.loadVideoById(currentVideo);
                 myVideoPlayer.media.load();
                 myVideoPlayer.media.play();
             }
@@ -47,24 +50,13 @@
 
 
     $(document).ready(function () {
+
+        player = new MediaElementPlayer('youtube1', {
+
+        });
         yourFunction();
-        /*
-         jQuery(document).ready(function($) {
-
-         player = new MediaElementPlayer('youtube1', {
-         defaultSpeed: 4.0,
-         features: ['speed'],
-         success: function (mediaElement, domObject) {
-         //mediaElement.defaultSpeed = 0.5;
-         mediaElement.load();
-         mediaElement.play();
-         }
-         });
 
 
-
-         });
-         */
     });
 
 </script>
