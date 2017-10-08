@@ -4,26 +4,29 @@
         <title>eGym Cardio</title>
         <link href='https://fonts.googleapis.com/css?family=Love+Ya+Like+A+Sister' rel='stylesheet' type='text/css'>
         <link href='https://fonts.googleapis.com/css?family=Codystar' rel='stylesheet' type='text/css'>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.6/angular.min.js"></script>
+        <script src="main.js"></script>
     </head>
-    <body>
+    <body ng-app="heartmood" ng-controller="HeartMoodController" class="ng-cloak">
         <div class="usercontainer">
-            <div><img src="userpic.jpg" class="userimage"></div>
-            <div> Ana</div>
-            <div>26</div>
-            <div>55 kg</div>
+            <div><img src="userpic.jpg" class="userimage">  Anna</div>
+            <div class="userinfo">age: {{UserAge}}</div>
+            <div class="userinfo">weight: {{UserWeight}}kg</div>
             <div class="cleardiv"></div>
         </div>
         <div id="chest">   
-            <div class="heartrate" id="heartbeat">80</div>         
+
             <div class="heart left side top">
             </div>
             <div class="heart center">&hearts;
             </div>
             <div class="heart right side"></div>
-        </div>
-        <div class="moodbutton">
-            <button class="">My mood</button>
+        </div>            
+        <div class="heartrate" id="heartbeat">{{HeartRate}}</div>
+        <div class="calories" id="calories">{{TotalCalories | number:2}} kCal</div>    
+        <div class="currentMood">
+            {{MyMood}}
         </div>
     </body>
 </html>
-<script src="main.js"></script>

@@ -4,6 +4,10 @@ body {
     padding: 0px;
 }
 
+[ng\:cloak], [ng-cloak], [data-ng-cloak], [x-ng-cloak], .ng-cloak, .x-ng-cloak {
+    display: none !important;
+  }
+
 @-webkit-keyframes beat {
     0% {-webkit-transform: scale(1)
       rotate(225deg); -webkit-box-shadow:0 0
@@ -129,22 +133,36 @@ body {
     float: right;
     margin-right: 30px;
   }
-  
 
-.userimage {
-    border-radius: 2px;
-    height: 60px;
-}
-
-.moodbutton {
+.currentMood {
     display: flex;
     align-items: center;
     justify-content: center;
+    font-size: 85px;
 }
 
 .heartrate {
     font-size: 80px;
     text-align: center;
+    vertical-align: middle;
+    z-index: 0 !important;
+}
+
+.calories {
+    font-size: 80px;
+    text-align: center;
+    vertical-align: middle;
+    z-index: 0 !important;
+}
+
+.userimage {
+    border-radius: 2px;
+    vertical-align: middle;
+    height: 60px;
+}
+
+.userinfo {
+    font-size: 30px !important;
 }
 
 .usercontainer {
@@ -155,7 +173,7 @@ body {
 }
 .usercontainer div {
     float: left;
-    width: 25%;
+    width: 33%;
     text-align: center;
     font-size: 40px;
     line-height: 80px;
