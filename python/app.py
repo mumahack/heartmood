@@ -16,6 +16,8 @@ while 1:
         response = requests.get(url)
         data = response.json()
         message = data["command"]
+        if not message:
+             print "Sended Command " + str(message)
         s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
         s.connect((TCP_IP, TCP_PORT))
         s.send(message)
