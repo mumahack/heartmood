@@ -21,7 +21,9 @@ Route::get('/backend', function () {
 
 
 Route::get('/tcpcommand', function () {
-    return json_encode(array("command" => "FSOC002255"));
+    $flight = App\ConfigStorage::where('name', "command")->first();
+
+    return json_encode(array("command" => $flight->value));
 });
 
 
@@ -36,8 +38,8 @@ Route::post('/setvalue', function () {
 Route::get('/getvalue', function () {
 
     $configstorage = App\ConfigStorage::all();
-    $retArr  = [];
-    foreach( $configstorage->toArray() as $item){
+    $retArr = [];
+    foreach ($configstorage->toArray() as $item) {
         $retArr[$item["name"]] = $item["value"];
     }
     return json_encode($retArr);

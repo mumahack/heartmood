@@ -46,19 +46,30 @@
     </div>
 </div>
 
+<input type="text" id="debugvalue" value="FSOC002255"/>
+<button id="debugbutton" value="">Debug</button>
+
 <script>
+    function setValue(name, value) {
+        $.post("setvalue", {name: name, value: value})
+            .done(function (data) {
+                //alert( "Data Loaded: " + data );
+            });
+    }
     $(document).ready(function () {
         $("input[type='radio']").change(function () {
             //$(this).val();
 
             $val = $("input[name='TriSea1']:checked").val();
-            $.post("setvalue", {name: "heartbeat", value: $val})
-                .done(function (data) {
-                    //alert( "Data Loaded: " + data );
-                });
+            setValue('heartbeat', $val);
 
 
             //alert($val);
+        });
+        $("#debugbutton").on('click', function () {
+            var value = $('#debugvalue').val();
+            console.log(value);
+            setValue('command', value);
         });
     });
 </script>
