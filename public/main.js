@@ -11,20 +11,28 @@ myApp.controller('HeartMoodController', ['$scope', function($scope) {
   $scope.TotalCalories = 0;
   $scope.Range = 8;
   
-  $scope.getProfile = function() {   
-    // get profile
-    switch($scope.Profiles)
-    {
-    case 1: // calm
-        $scope.TargetHeartRate = 60;
-    break;
-    case 2: // normal
-        $scope.TargetHeartRate = 90;
-    break;
-    case 3: // sporty
-        $scope.TargetHeartRate = 140;
-    break;
-    }
+  $scope.getProfile = function() {
+
+      $.getJSON('getvalue', function (data) {
+          var value = parseInt(data.heartbeat);
+          console.log(value);
+          $scope.Profiles = value;
+          // get profile
+          switch($scope.Profiles)
+          {
+              case 1: // calm
+                  $scope.TargetHeartRate = 60;
+                  break;
+              case 2: // normal
+                  $scope.TargetHeartRate = 90;
+                  break;
+              case 3: // sporty
+                  $scope.TargetHeartRate = 140;
+                  break;
+          }
+
+      });
+
   }
 
   $scope.getHeartRate = function() {
