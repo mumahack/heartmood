@@ -21,13 +21,13 @@ myApp.controller('HeartMoodController', ['$scope', function($scope) {
           switch($scope.Profiles)
           {
               case 1: // calm
-                  $scope.TargetHeartRate = 60;
+                  $scope.TargetHeartRate = 70;
                   break;
               case 2: // normal
-                  $scope.TargetHeartRate = 90;
+                  $scope.TargetHeartRate = 85;
                   break;
               case 3: // sporty
-                  $scope.TargetHeartRate = 120;
+                  $scope.TargetHeartRate = 100;
                   break;
           }
 
