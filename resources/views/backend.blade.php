@@ -22,22 +22,59 @@
                     <li class="list-group-item">
                         Heartbeat Slow
                         <div class="TriSea-technologies-Switch pull-right">
-                            <input id="TriSeaDefault" name="TriSea1" type="radio" value="1"/>
-                            <label for="TriSeaDefault" class="label-success"></label>
+                            <input id="heartbeat1" class="heartbeat" name="heartbeat" type="radio" value="1"/>
+                            <label for="heartbeat1" class="label-success"></label>
                         </div>
                     </li>
                     <li class="list-group-item">
                         Heartbeat Normal
                         <div class="TriSea-technologies-Switch pull-right">
-                            <input id="TriSeaPrimary" name="TriSea1" type="radio" value="2"/>
-                            <label for="TriSeaPrimary" class="label-success"></label>
+                            <input id="heartbeat2"  class="heartbeat" name="heartbeat" type="radio" value="2"/>
+                            <label for="heartbeat2" class="label-success"></label>
                         </div>
                     </li>
                     <li class="list-group-item">
                         Heartbeat Fast
                         <div class="TriSea-technologies-Switch pull-right">
-                            <input id="TriSeaSuccess" name="TriSea1" type="radio" value="3"/>
-                            <label for="TriSeaSuccess" class="label-success"></label>
+                            <input id="heartbeat3" class="heartbeat" name="heartbeat" type="radio" value="3"/>
+                            <label for="heartbeat3" class="label-success"></label>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<div class="container">
+    <div class="row">
+        <div class="col-xs-12 col-sm-6 col-md-4 col-sm-offset-3 col-md-offset-4">
+            <div class="panel panel-default">
+                <!-- Default panel contents -->
+                <h2 class="panel-heading" style="text-align:center;">Backend</h2>
+
+                <ul class="list-group">
+                    <li class="list-group-item">
+                       Green Light
+                        <div class="TriSea-technologies-Switch pull-right">
+                            <input id="lightswitch1" class="lightswitch" name="lightswitch" type="radio" value="1"/>
+                            <label for="lightswitch1" class="label-success"></label>
+                        </div>
+                    </li>
+                    <li class="list-group-item">
+                        Red Light
+                        <div class="TriSea-technologies-Switch pull-right">
+                            <input id="lightswitch2" class="lightswitch" name="lightswitch" type="radio" value="2"/>
+                            <label for="lightswitch2" class="label-success"></label>
+                        </div>
+                    </li>
+                    <li class="list-group-item">
+                        Red (Flashing)
+                        <div class="TriSea-technologies-Switch pull-right">
+                            <input id="lightswitch3" class="lightswitch" name="lightswitch" type="radio" value="3"/>
+                            <label for="lightswitch3" class="label-success"></label>
                         </div>
                     </li>
                 </ul>
@@ -60,7 +97,45 @@ Trigger : FSOC068255
 <input type="text" id="debugvalue" value="FSOC070255"/>
 <button id="debugbutton" value="">Debug</button>
 
+
+<script src="mediaelement/mediaelement-and-player.min.js"></script>
+<link rel="stylesheet" href="mediaelement/mediaelementplayer.css"/>
+
+
+<script src="plugins/speed/speed.min.js"></script>
+<script src="plugins/speed/speed-i18n.js"></script>
+<link rel="stylesheet" href="plugins/speed/speed.min.css">
+
 <script>
+
+
+
+</script>
+Heartbeat:
+<div id="heartbeat"></div>
+<div id=""></div>
+
+
+<video id="youtube1" width="640" height="360">
+    <source src="http://www.youtube.com/watch?v=nOEw9iiopwI" type="video/youtube">
+</video>
+
+
+<script>
+    $(document).ready(function () {
+
+        player = new MediaElementPlayer('youtube1', {
+
+        });
+
+
+
+    });
+
+
+    var currentVideo = null;
+    var player = null;
+
     function setValue(name, value) {
         $.post("setvalue", {name: name, value: value})
             .done(function (data) {
@@ -68,11 +143,24 @@ Trigger : FSOC068255
             });
     }
     $(document).ready(function () {
-        $("input[type='radio']").change(function () {
+        $("input.heartbeat").change(function () {
             //$(this).val();
 
-            $val = $("input[name='TriSea1']:checked").val();
+            $val = $("input.heartbeat:checked").val();
             setValue('heartbeat', $val);
+
+
+
+
+
+
+            //alert($val);
+        });
+
+        $("input.lightswitch").change(function () {
+            //$(this).val();
+
+            $val = $("input.lightswitch:checked").val();
 
             switch (parseInt($val)) {
                 case 1:
@@ -86,37 +174,8 @@ Trigger : FSOC068255
                     break;
             }
 
-
-
-
-
-            //alert($val);
-        });
-        $("#debugbutton").on('click', function () {
-            var value = $('#debugvalue').val();
-            console.log(value);
-            setValue('command', value);
-        });
-    });
-</script>
-
-<script src="mediaelement/mediaelement-and-player.min.js"></script>
-<link rel="stylesheet" href="mediaelement/mediaelementplayer.css"/>
-
-
-<script src="plugins/speed/speed.min.js"></script>
-<script src="plugins/speed/speed-i18n.js"></script>
-<link rel="stylesheet" href="plugins/speed/speed.min.css">
-
-<script>
-
-    var currentVideo = null;
-    var player = null;
-    function yourFunction() {
-        // do whatever you like here
-        $.getJSON('getvalue', function (data) {
             newVideo = currentVideo;
-            switch (parseInt(data.heartbeat)) {
+            switch (parseInt($val)) {
                 case 1:
                     newVideo = "cLNjP1vkyYU";
                     break;
@@ -127,7 +186,7 @@ Trigger : FSOC068255
                     newVideo = "UXxRyNvTPr8";
                     break;
             }
-            $('#heartbeat').html(data.heartbeat);
+            //$('#heartbeat').html(data.heartbeat);
 
             if (newVideo != currentVideo) {
                 console.log("need to play following video"+currentVideo);
@@ -140,28 +199,20 @@ Trigger : FSOC068255
             }
 
 
+
+
+
+
+
+            //alert($val);
         });
 
-        setTimeout(yourFunction, 1000);
-    }
 
-
-    $(document).ready(function () {
-
-        player = new MediaElementPlayer('youtube1', {
-
+        $("#debugbutton").on('click', function () {
+            var value = $('#debugvalue').val();
+            console.log(value);
+            setValue('command', value);
         });
-        yourFunction();
-
-
     });
-
 </script>
-Heartbeat:
-<div id="heartbeat"></div>
-<div id=""></div>
 
-
-<video id="youtube1" width="640" height="360">
-    <source src="http://www.youtube.com/watch?v=nOEw9iiopwI" type="video/youtube">
-</video>

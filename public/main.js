@@ -27,7 +27,7 @@ myApp.controller('HeartMoodController', ['$scope', function($scope) {
                   $scope.TargetHeartRate = 90;
                   break;
               case 3: // sporty
-                  $scope.TargetHeartRate = 140;
+                  $scope.TargetHeartRate = 120;
                   break;
           }
 
