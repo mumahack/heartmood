@@ -28,7 +28,7 @@ myApp.controller('HeartMoodController', ['$scope', function($scope) {
   }
 
   $scope.getHeartRate = function() {
-    var maxJump = Math.floor(Math.random() * (5 - 2));
+    var maxJump = Math.floor(Math.random() * (6 - 2));
     var currentDiference = $scope.TargetHeartRate - $scope.HeartRate;
     if(currentDiference < 0)
     {
@@ -45,12 +45,15 @@ myApp.controller('HeartMoodController', ['$scope', function($scope) {
         {
         case 1: // calm
             $scope.DisplayMood = "Calm";
+            document.body.style.backgroundColor = "LightSlateGray";
         break;
         case 2: // normal
             $scope.DisplayMood = "Normal";
+            document.body.style.backgroundColor = "SlateGray";
         break;
         case 3: // sporty
             $scope.DisplayMood = "Sporty";
+            document.body.style.backgroundColor = "Gray";
         break;
         }
 
