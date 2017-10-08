@@ -46,19 +46,122 @@
     </div>
 </div>
 
+
+
+<?php
+        /*
+Leer Befehl: FSOC070255
+Grün : FSOC066255
+Rot : FSOC067255
+Trigger : FSOC068255
+        */
+?>
+
+<input type="text" id="debugvalue" value="FSOC070255"/>
+<button id="debugbutton" value="">Debug</button>
+
 <script>
+    function setValue(name, value) {
+        $.post("setvalue", {name: name, value: value})
+            .done(function (data) {
+                //alert( "Data Loaded: " + data );
+            });
+    }
     $(document).ready(function () {
         $("input[type='radio']").change(function () {
             //$(this).val();
 
             $val = $("input[name='TriSea1']:checked").val();
-            $.post("setvalue", {name: "heartbeat", value: $val})
-                .done(function (data) {
-                    //alert( "Data Loaded: " + data );
-                });
+            setValue('heartbeat', $val);
+
+            switch (parseInt($val)) {
+                case 1:
+                    setValue('command', "FSOC066255");
+                    break;
+                case 2:
+                    setValue('command', "FSOC067255");
+                    break;
+                case 3:
+                    setValue('command', "FSOC068255");
+                    break;
+            }
+
+
+
 
 
             //alert($val);
         });
+        $("#debugbutton").on('click', function () {
+            var value = $('#debugvalue').val();
+            console.log(value);
+            setValue('command', value);
+        });
     });
 </script>
+
+<script src="mediaelement/mediaelement-and-player.min.js"></script>
+<link rel="stylesheet" href="mediaelement/mediaelementplayer.css"/>
+
+
+<script src="plugins/speed/speed.min.js"></script>
+<script src="plugins/speed/speed-i18n.js"></script>
+<link rel="stylesheet" href="plugins/speed/speed.min.css">
+
+<script>
+
+    var currentVideo = null;
+    var player = null;
+    function yourFunction() {
+        // do whatever you like here
+        $.getJSON('getvalue', function (data) {
+            newVideo = currentVideo;
+            switch (parseInt(data.heartbeat)) {
+                case 1:
+                    newVideo = "cLNjP1vkyYU";
+                    break;
+                case 2:
+                    newVideo = "1TsVjvEkc4s";
+                    break;
+                case 3:
+                    newVideo = "UXxRyNvTPr8";
+                    break;
+            }
+            $('#heartbeat').html(data.heartbeat);
+
+            if (newVideo != currentVideo) {
+                console.log("need to play following video"+currentVideo);
+                currentVideo = newVideo;
+                var myVideoPlayer = player;
+                console.log(myVideoPlayer);
+                myVideoPlayer.media.youTubeApi.loadVideoById(currentVideo);
+                myVideoPlayer.media.load();
+                myVideoPlayer.media.play();
+            }
+
+
+        });
+
+        setTimeout(yourFunction, 1000);
+    }
+
+
+    $(document).ready(function () {
+
+        player = new MediaElementPlayer('youtube1', {
+
+        });
+        yourFunction();
+
+
+    });
+
+</script>
+Heartbeat:
+<div id="heartbeat"></div>
+<div id=""></div>
+
+
+<video id="youtube1" width="640" height="360">
+    <source src="http://www.youtube.com/watch?v=nOEw9iiopwI" type="video/youtube">
+</video>
