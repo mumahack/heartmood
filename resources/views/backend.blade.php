@@ -177,13 +177,13 @@ Heartbeat:
             newVideo = currentVideo;
             switch (parseInt($val)) {
                 case 1:
-                    newVideo = "cLNjP1vkyYU";
+                    newVideo = "60M7GF5CX5E";
                     break;
                 case 2:
-                    newVideo = "1TsVjvEkc4s";
+                    newVideo = "ENBbZyK51iY";
                     break;
                 case 3:
-                    newVideo = "UXxRyNvTPr8";
+                    newVideo = "mCC3ghwfuwY";
                     break;
             }
             //$('#heartbeat').html(data.heartbeat);
