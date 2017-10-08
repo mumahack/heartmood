@@ -1,6 +1,6 @@
 var myApp = angular.module('heartmood',[]);
 myApp.controller('HeartMoodController', ['$scope', function($scope) {
-  $scope.HeartRate = 90;
+  $scope.HeartRate = 85;
   $scope.TargetHeartRate;
   $scope.UserName = "Anna";
   $scope.UserWeight = 55;
