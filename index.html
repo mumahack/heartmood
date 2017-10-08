@@ -15,18 +15,18 @@
             <div class="userinfo">weight: {{UserWeight}}kg</div>
             <div class="cleardiv"></div>
         </div>
-        <div id="chest">   
-
+        <div id="chest">
+            <div style="margin-top: 20px;"></div>
+            <div class="heartrate" id="heartbeat">{{HeartRate}}</div>
+            <div class="calories" id="calories">{{TotalCalories | number:2}} kCal</div>    
             <div class="heart left side top">
             </div>
             <div class="heart center">&hearts;
             </div>
             <div class="heart right side"></div>
         </div>            
-        <div class="heartrate" id="heartbeat">{{HeartRate}}</div>
-        <div class="calories" id="calories">{{TotalCalories | number:2}} kCal</div>    
         <div class="currentMood">
-            {{MyMood}}
+            {{DisplayMood}}
         </div>
     </body>
 </html>
