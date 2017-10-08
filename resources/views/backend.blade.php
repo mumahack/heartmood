@@ -46,7 +46,18 @@
     </div>
 </div>
 
-<input type="text" id="debugvalue" value="FSOC002255"/>
+
+
+<?php
+        /*
+Leer Befehl: FSOC070255
+Grün : FSOC066255
+Rot : FSOC067255
+Trigger : FSOC068255
+        */
+?>
+
+<input type="text" id="debugvalue" value="FSOC070255"/>
 <button id="debugbutton" value="">Debug</button>
 
 <script>
@@ -62,6 +73,21 @@
 
             $val = $("input[name='TriSea1']:checked").val();
             setValue('heartbeat', $val);
+
+            switch (parseInt($val)) {
+                case 1:
+                    setValue('command', "FSOC066255");
+                    break;
+                case 2:
+                    setValue('command', "FSOC067255");
+                    break;
+                case 3:
+                    setValue('command', "FSOC068255");
+                    break;
+            }
+
+
+
 
 
             //alert($val);

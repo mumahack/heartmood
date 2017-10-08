@@ -22,8 +22,10 @@ Route::get('/backend', function () {
 
 Route::get('/tcpcommand', function () {
     $flight = App\ConfigStorage::where('name', "command")->first();
-
-    return json_encode(array("command" => $flight->value));
+    $value = $flight->value;
+    $flight->value = "FSOC070255";
+    $flight->save();
+    return json_encode(array("command" => $value));
 });
 
 
